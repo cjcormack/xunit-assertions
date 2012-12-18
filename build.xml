@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (C) 2012 by Databliss, LLC
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in
+  ~ all copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  ~ THE SOFTWARE.
+  -->
+
+<!--
+  ~ Uses the directory structure with modules at the root level
+  ~ and a build/ directory to hold temporary artifacts
+-->
+<project name="xunit" default="build">
+  <property file="build.properties"/>
+  <property name="nk4-ant-suite" value="../NK4-Ant-Suite-0_3/"/>
+  <property name="xunit.version" value="1.0.0"/>
+
+  <include file="${nk4-ant-suite}/build-common.xml"/>
+
+  <path id="nk4.anttools.path">
+    <fileset dir="${nk4-ant-suite}">
+      <include name="*.jar"/>
+      <include name="lib/*.jar"/>
+    </fileset>
+  </path>
+
+  <available file="lib/netkernel/modules.conf" property="netkernel.downloaded"/>
+
+  <taskdef name="nkmodule"
+           classpathref="nk4.anttools.path"
+           classname="org.netkernelroc.antTools.packager.NetKernelModuleTask"/>
+  
+  <taskdef name="nkpackage"
+           classpathref="nk4.anttools.path"
+           classname="org.netkernelroc.antTools.packager.NetKernelPackageTask"/>
+
+  <taskdef name="nkdownload"
+           classpathref="nk4.anttools.path"
+           classname="org.netkernelroc.antTools.download.DownloadNetKernelAntTask"/>
+
+  <taskdef name="testng"
+           classpathref="nk4.anttools.path"
+           classname="org.testng.TestNGAntTask" />
+
+  <target name="clean">
+    <!--delete dir="module" includes="**/build/**/*"/-->
+    <delete dir="build"/>
+    <delete dir="${basedir}">
+      <include name="*.jar"/>
+    </delete>
+  </target>
+
+  <target name="clean.full" depends="clean">
+    <delete dir="lib/netkernel"/>
+    <nkdownload path="lib/netkernel"/>
+  </target>
+
+  <target name="init" unless="netkernel.downloaded">
+    <nkdownload path="lib/netkernel"/>
+  </target>
+
+  <target name="xunit.init" depends="init">
+    <mkdir dir="build/urn.org.netkernelroc.netkernel.xunit.assertions"/>
+  </target>
+
+  <target name="xunit.build" depends="xunit.init">
+    <path id="build.path">
+      <!-- Chris - I don't think I need any lib support here -->
+      <!--
+      <fileset dir="lib">
+        <include name="netkernel/lib/*.jar"/>
+        <include name="netkernel/modules/*.jar"/>
+        <include name="*.jar"/>
+      </fileset>
+      <fileset dir="module/urn.org.netkernelroc.mod.xunit/src/lib/"
+               includes="*.jar"/>
+      -->
+    </path>
+
+    <javac classpathref="build.path"
+           srcdir="urn.org.netkernelroc.netkernel.xunit.assertions/"
+           includes="**/*.java"
+           destdir="build/urn.org.netkernelroc.netkernel.xunit.assertions"
+           debug="true"
+           target="1.5"/>
+
+    <copy todir="build/urn.org.netkernelroc.netkernel.xunit.assertions">
+      <fileset dir="urn.org.netkernelroc.netkernel.xunit.assertions"/>
+    </copy>
+    <copy todir="build/urn.org.netkernelroc.netkernel.xunit.assertions.doc">
+      <fileset dir="urn.org.netkernelroc.netkernel.xunit.assertions.doc"/>
+    </copy>
+
+    <set-version-number srcmodulefile="urn.org.netkernelroc.netkernel.xunit.assertions/module.xml"
+                        destmodulefile="build/urn.org.netkernelroc.netkernel.xunit.assertions/module.xml"
+                        version="${xunit.version}"/>
+    <set-version-number srcmodulefile="urn.org.netkernelroc.netkernel.xunit.assertions.doc/module.xml"
+                        destmodulefile="build/urn.org.netkernelroc.netkernel.xunit.assertions.doc/module.xml"
+                        version="${xunit.version}"/>
+
+    <nkmodule destdir="build/modules/"
+              modulefile="module/urn.org.netkernelroc.netkernel.xunit.assertions/module.xml">
+      <zipfileset dir="build/urn.org.netkernelroc.netkernel.xunit.assertions" prefix=""/>
+    </nkmodule>
+    <nkmodule destdir="build/modules/"
+              modulefile="module/urn.org.netkernelroc.netkernel.xunit.assertions.doc/module.xml">
+      <zipfileset dir="build/urn.org.netkernelroc.netkernel.xunit.assertions.doc" prefix=""/>
+    </nkmodule>
+  </target>
+
+  <target name="xunit-test.init" depends="init">
+    <mkdir dir="build/urn.org.netkernelroc.netkernel.xunit.assertions.test"/>
+  </target>
+
+  <target name="xunit-test.build" depends="xunit-test.init,xunit.build">
+    <path id="build.path">
+      <fileset dir="lib">
+        <include name="netkernel/lib/*.jar"/>
+        <include name="netkernel/module-jars/*.jar"/>
+        <include name="*.jar"/>
+      </fileset>
+      <pathelement path="build/urn.org.netkernelroc.netkernel.xunit.assertions.test"/>
+    </path>
+
+    <javac classpathref="build.path"
+           srcdir="urn.org.netkernelroc.netkernel.xunit.assertions"
+           includes="**/*.java"
+           destdir="build/urn.org.netkernelroc.netkernel.xunit.assertions"
+           debug="true"
+           target="1.5"/>
+
+    <copy todir="build/urn.org.netkernelroc.netkernel.xunit.assertions.test">
+      <fileset dir="urn.org.netkernelroc.netkernel.xunit.assertions.test"/>
+    </copy>
+
+    <nkmodule destdir="build/modules/"
+              modulefile="build/urn.org.netkernelroc.netkernel.xunit.assertions.test/module.xml">
+      <zipfileset dir="build/urn.org.netkernelroc.netkernel.xunit.assertions.test" prefix=""/>
+    </nkmodule>
+  </target>
+
+  <target name="build">
+    <antcall target="xunit.build"/>
+    <antcall target="xunit-test.build"/>
+  </target>
+
+  <target name="package" depends="build">
+    <nkpackage destfile="build/netkernelroc-xunit-${xunit.version}.nkp.jar"
+               name="netkernelroc-xunit"
+               description="NetKernelROC / XUnit / Assertions"
+               version="${xunit.version}">
+      <modulesfileset dir="build/" prefix="" includes="*.jar"/>
+    </nkpackage>
+  </target>
+
+  <target name="repository.publish" depends="package">
+    <property name="repository.publish" value="true"/>
+    <publish-package package.name="netkernelroc-xunit"
+                     package.version="${xunit.version}"
+                     package.location="build/netkernelroc-xunit-${xunit.version}.nkp.jar"/>
+  </target>
+
+  <target name="repository.push">
+    <property name="repository.push" value="true"/>
+    <push-package package.name="netkernelroc-xunit"
+                  package.version="${xunit.version}"/>
+  </target>
+
+  <target name="test" depends="build">
+    <delete dir="log"/>
+    <mkdir dir="log"/>
+
+    <delete dir="build/tests"/>
+    <mkdir dir="build/tests"/>
+
+    <path id="test-path">
+      <path refid="nk4.anttools.path"/>
+      <fileset dir="lib/netkernel/lib/">
+        <include name="*.jar"/>
+      </fileset>
+      <fileset dir="lib/netkernel/modules/">
+        <include name="*.jar"/>
+      </fileset>
+    </path>
+    <xslt classpathref="test-path"
+          in="urn.org.netkernelroc.netkernel.xunit.assertions.test/etc/system/Tests.xml"
+          out="build/tests/webtests-testng.xml">
+      <style>
+        <javaresource classpathref="test-path" name="generate-suite.xsl"/>
+      </style>
+    </xslt>
+
+    <testng listeners="org.netkernelroc.antTools.testNG.NKInvokerSuiteListener"
+            classpathref="test-path" haltonfailure="true">
+      <xmlfileset dir="build/tests"/>
+      <sysproperty key="java.protocol.handler.pkgs" value="org.ten60.netkernel.protocolhandler"/>
+      <sysproperty key="org.netkernelroc.antTools.testNG.modules" value="build/urn.org.netkernelroc.netkernel.xunit.assertions/,build/urn.org.netkernelroc.netkernel.xunit.assertions.test/,build/urn.org.netkernelroc.netkernel.xunit.assertions.doc/"/>
+      <sysproperty key="org.netkernelroc.antTools.testNG.moduleConf" value="lib/netkernel/modules.conf"/>
+      <sysproperty key="netkernel.http.backend.port" value="1068"/>
+    </testng>
+  </target>
+</project>
