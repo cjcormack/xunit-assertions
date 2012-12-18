@@ -1,0 +1,9 @@
+
+= NetKernelROC XUnit Assertion Library =
+
+The NetKernelROC XUnit assertion library extends the standard NetKernel assertion
+set with tests for HTTP protocol headers and XML content using CSS3 selectors.
+
+
+
+

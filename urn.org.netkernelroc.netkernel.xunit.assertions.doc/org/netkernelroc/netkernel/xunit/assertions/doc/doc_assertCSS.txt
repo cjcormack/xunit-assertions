@@ -1,0 +1,87 @@
+{endpoint}netkernelroc:assert:CSS{/endpoint}
+
+
+= CSS Assertion =
+
+The ''css'' assert extends the standard set of XUnit assertions
+to provide assertions on XML content using the CSS3 selector grammar.
+
+An assertion requires two parts - the CSS3 selector and an integer, which
+are separated by the forward-slash character (/):
+
+{xml}
+<css>{css3 selector}/{integer}</css>
+{/xml}
+
+The assertion will apply the CSS3 selector to the XML document returned by
+the XUnit request,
+count the number of elements returned by the selector, and compare that
+number to the supplied integer value.
+If the number of selected elements matches the integer value, the assertion
+returns TRUE, otherwise it returns FALSE.
+
+CSS3 selectors are easy to understand and relatively powerful. Documentation can be found
+in numerous documents on the Web including:
+
+[http://www.w3.org/TR/selectors/]
+
+
+== Example ==
+
+For example, the following XML
+
+
+{xml}
+<customer>
+  <name>BestBuy</name>
+  <address>
+  </address>
+  <address>
+  </address>
+</customer>
+{/xml}
+
+would have the following assertion be true:
+
+{xml}
+<css>address/2</css>
+{/xml}
+
+Testing HTML requires a conversion to properly formed XML which can be
+done with the TagSoup service.
+The following complete test specification illustrates how to assert
+that the BestBuy.com website home page includes a single ''head'' element:
+
+{xml}
+<testlist>
+  <import>res:/org/netkernelroc/netkernel/xunit/assertions/netkernelrocAssertLibrary.xml</import>
+</testlist>
+{/xml}
+
+An example test would look like this:
+
+{xml}
+<testlist>
+  <import>res:/org/netkernelroc/netkernel/xunit/assertions/netkernelrocAssertLibrary.xml</import>
+
+   <test>
+      <request>
+        <identifier>active:tagSoup</identifier>
+        <argument name="operand">
+          <request>
+            <identifier>active:httpGet</identifier>
+            <argument name="url">http://www.bestbuy.com</argument>
+          </request>
+        </argument>
+      </request>
+      <assert>
+        <css>head/1</css>
+      </assert>
+    </test>
+
+</testlist>
+{/xml}
+
+
+
+

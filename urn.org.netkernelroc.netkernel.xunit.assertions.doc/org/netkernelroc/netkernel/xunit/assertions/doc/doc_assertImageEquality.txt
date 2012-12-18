@@ -1,0 +1,37 @@
+{endpoint}netkernelroc:assert:imageEquality{/endpoint}
+
+
+= Image Equality Assertion =
+
+XUnit test assertions to compare two images.  It performs a simple width and height check first.  
+If those are equal, it continues on and compares the data buffers.
+
+To use the XUnit assertion library, the test space must import:
+
+The Test list must import the test library:
+
+{xml}
+<testlist>
+  <import>res:/org/netkernelroc/netkernel/xunit/assertions/netkernelrocAssertLibrary.xml</import>
+</testlist>
+{/xml}
+
+An example test would look like this:
+
+{xml}
+<testlist>
+  <import>res:/org/netkernelroc/netkernel/xunit/assertions/netkernelrocAssertLibrary.xml</import>
+
+  <test name="Image Assertion Equality Test">
+    <request>
+      <identifier>res:/resources/images/redbox.jpg</identifier>
+    </request>
+    <assert>
+      <imageEquals>res:/resources/images/redbox.png</imageEquals>
+    </assert>
+  </test>
+</testlist>
+{/xml}
+
+Because it internally reads the images into a java.awt.Image object, you can compare two images of different formats.
+For example, in the above example, a JPG is being compared to a PNG.
