@@ -1,0 +1,95 @@
+<config>
+    <endpoint>
+        <id>bestbuy:assert:CSS</id>
+        <name>CSS Assert</name>
+        <description>Provides a set of assertions for XML content using CSS selectors</description>
+        <grammar>
+            <active>
+                <identifier>active:assertCSS</identifier>
+                <argument name="result" min="1" max="1" />
+                <argument name="test" min="1" max="1" />
+            </active>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">com.bestbuy.netkernel.xunit.assertions.endpoint.CSSAssert</argument>
+            <argument name="result">arg:result</argument>
+            <argument name="test">arg:test</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <id>bestbuy:assert:HTTPOld</id>
+        <name>HTTP Assert</name>
+        <description>Provides a set of assertions for the HTTP protocol</description>
+        <grammar>
+            <active>
+                <identifier>active:assertHTTP</identifier>
+                <argument name="response" min="1" max="1" />
+                <argument name="headerTestValue" min="1" max="1" />
+                <argument name="headerName" min="1" max="1" />
+            </active>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">com.bestbuy.netkernel.xunit.assertions.endpoint.HTTPOldAssert</argument>
+            <argument name="response">arg:response</argument>
+            <argument name="headerTestValue">arg:headerTestValue</argument>
+            <argument name="headerName">arg:headerName</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <id>bestbuy:assert:HTTP</id>
+        <name>HTTP Assert</name>
+        <description>Provides an assertion for HTTP</description>
+        <grammar>
+            <active>
+                <identifier>active:assertHTTP</identifier>
+                <argument name="result" min="1" max="1" desc="http response under test"/>
+                <argument name="test" min="1" max="1" desc="http assertions in XML"/>
+            </active>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">com.bestbuy.netkernel.xunit.assertions.endpoint.HTTPAssert</argument>
+            <argument name="result">arg:result</argument>
+            <argument name="test">arg:test</argument>
+        </request>
+    </endpoint>
+    <endpoint>
+        <id>bestbuy:assert:image</id>
+        <name>Image Assert</name>
+        <description>Provides a set of assertions for Images</description>
+        <grammar>
+            <active>
+                <identifier>active:assertImage</identifier>
+                <argument name="result" min="1" max="1" desc="image under test." />
+                <argument name="test" min="1" max="1" desc="image assertions in XML" />
+            </active>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">com.bestbuy.netkernel.xunit.assertions.endpoint.ImageAssert</argument>
+            <argument name="result">arg:result</argument>
+            <argument name="test">arg:test</argument>
+        </request>
+    </endpoint>
+    <!-- I would like to see the operand be use for both -->
+    <endpoint>
+        <id>bestbuy:assert:imageEquality</id>
+        <name>Image Equality Assert</name>
+        <description>Provides an equality assertion for two images</description>
+        <grammar>
+            <active>
+                <identifier>active:assertImageEquality</identifier>
+                <argument name="result" min="1" max="1" desc="source image under test" />
+                <argument name="test" min="1" max="1" desc="image to compare with" />
+            </active>
+        </grammar>
+        <request>
+            <identifier>active:java</identifier>
+            <argument name="class">com.bestbuy.netkernel.xunit.assertions.endpoint.ImageEqualityAssert</argument>
+            <argument name="result">arg:result</argument>
+            <argument name="test">arg:test</argument>
+        </request>
+    </endpoint>
+</config>
