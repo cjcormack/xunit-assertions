@@ -1,0 +1,19 @@
+apply plugin: 'netkernelBuilder'
+
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+  dependencies {
+  classpath group: 'net.databliss.gradle.plugins', name: 'gradle-nk-plugin', version: '0.2.0'
+  }
+}
+
+project.ext {
+  netkernelModules = ["urn:org:netkernelroc:netkernel:xunit:assertions"]
+}
+
+
+
+
+
