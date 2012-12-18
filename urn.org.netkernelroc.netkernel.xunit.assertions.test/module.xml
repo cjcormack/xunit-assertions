@@ -1,0 +1,44 @@
+  <module version="2.0">
+    <meta>
+      <identity>
+        <uri>urn:org:netkernelroc:netkernel:xunit:assertions:test</uri>
+        <version>1.0.0</version>
+      </identity>
+      <info>
+        <name>NetKernelROC / XUnit / Assertions / Test</name>
+        <description>Add description</description>
+        <icon>res:/org/netkernelroc/netkernel/xunit/assertions/test/images/icon.png</icon>
+      </info>
+    </meta>
+
+    <system>
+      <dynamic />
+    </system>
+
+    <rootspace
+      name="NetKernelROC / XUnit / Assertions / Test"    public="true"  uri="urn:org:netkernelroc:netkernel:xunit:assertions:test"      >
+
+      <fileset>
+        <regex>res:/etc/system/Tests.xml</regex>
+      </fileset>
+      <fileset>
+        <regex>res:/resources/tests/testlist.xml</regex>
+      </fileset>
+      <fileset>
+        <regex>res:/resources/.*</regex>
+      </fileset>
+      <import>
+        <uri>urn:org:netkernelroc:netkernel:xunit:assertions</uri>
+      </import>
+      <import>
+        <private/>
+        <uri>urn:org:netkernel:xml:core</uri>
+      </import>
+      <import>
+        <uri>urn:org:netkernel:util:image</uri>
+      </import>
+
+    </rootspace>
+
+  </module>
+  
