@@ -3,7 +3,7 @@
 
   <doc>
  		<id>urn:org:netkernelroc:xunit:guide</id>
- 		<title>Guide to NetKernelROC XUnit assertion library</title>
+ 		<title>NetKernelROC XUnit assertion library</title>
     <desc>Provides a set of XUnit assertions</desc>
  		<uri>res:/org/netkernelroc/xunit/doc/doc_guide.txt</uri>
  	</doc>
@@ -17,8 +17,8 @@
 
   <doc>
  		<id>urn:org:netkernelroc:xunit:assertCSS</id>
- 		<title>CSS content assertions</title>
-    <desc>Uses a CSS Selector to validate a XML resource</desc>
+ 		<title>XML structure assertions</title>
+    <desc>Validate XML structure with CSS selectors</desc>
  		<uri>res:/org/netkernelroc/xunit/doc/doc_assertCSS.txt</uri>
  	</doc>
 
