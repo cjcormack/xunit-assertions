@@ -44,33 +44,17 @@
     </endpoint>
 
     <endpoint>
-        <id>netkernelroc:assert:HTTP</id>
-        <name>HTTP Assert</name>
-        <description>Provides an assertion for HTTP</description>
-        <grammar>
-            <active>
-                <identifier>active:assertHTTP</identifier>
-                <argument name="result" min="1" max="1" desc="http response under test"/>
-                <argument name="test" min="1" max="1" desc="http assertions in XML"/>
-            </active>
-        </grammar>
-      <class>org.netkernelroc.xunit.endpoint.HTTPAssert</class>
-    </endpoint>
-
-
-    <endpoint>
-      <id>netkernelroc:assert:HTTPOld</id>
+      <id>netkernelroc:assert:HTTP</id>
       <name>HTTP Assert</name>
-      <description>Provides a set of assertions for the HTTP protocol</description>
+      <description>Provides an assertion for HTTP</description>
       <grammar>
         <active>
           <identifier>active:assertHTTP</identifier>
-          <argument name="response" min="1" max="1"/>
-          <argument name="headerTestValue" min="1" max="1"/>
-          <argument name="headerName" min="1" max="1"/>
+          <argument name="response" min="1" max="1" desc="http response under test"/>
+          <argument name="test" min="1" max="1" desc="http assertions in XML"/>
         </active>
       </grammar>
-      <class>org.netkernelroc.xunit.endpoint.HTTPOldAssert</class>
+      <class>org.netkernelroc.xunit.endpoint.HTTPAssert</class>
     </endpoint>
 
     <endpoint>

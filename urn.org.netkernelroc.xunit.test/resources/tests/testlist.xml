@@ -204,5 +204,18 @@
     </assert>
   </test>
 
+  <test name="HTTP Return Code test - 200">
+    <request>
+      <identifier>active:httpGet+url@http://localhost:10888/reflect/returnCode/200</identifier>
+    </request>
+    <assert>
+      <http>
+        <assertions>
+          <returnCode>200</returnCode>
+          <Last-Modified/>
+        </assertions>
+      </http>
+    </assert>
+  </test>
 
 </testlist>

@@ -8,9 +8,17 @@
     <argument name="test">arg:test:tagValue</argument>
   </assertDefinition>
 
+  <assertDefinition name="http">
+    <identifier>active:assertHTTP</identifier>
+    <argument name="response">arg:test:response</argument>
+    <argument name="test">arg:test:tagValue</argument>
+  </assertDefinition>
+
+
 
   <!-- HTTP response assertions -->
 
+  <!--
   <assertDefinition name="httpReturnCode">
     <identifier>active:assertHTTP</identifier>
     <argument name="response">arg:test:response</argument>
@@ -309,6 +317,7 @@
     </argument>
   </assertDefinition>
 
+-->
   <!-- Image Assertions -->
 
   <assertDefinition name="image">
