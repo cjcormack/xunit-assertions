@@ -1,4 +1,0 @@
-  =NetKernelROC XUnit Assertion Library=
-
-  This contains the title information for the book
-  

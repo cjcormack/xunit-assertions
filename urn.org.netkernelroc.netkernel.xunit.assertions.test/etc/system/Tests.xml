@@ -1,8 +1,0 @@
-<tests>
-  <test>
-    <id>urn:org:netkernelroc:netkernel:xunit:assertions:test</id>
-    <name>NetKernelROC XUnit Extensions Test</name>
-    <desc>Production tests for the NetKernelROC XUnit extensions module</desc>
-    <uri>res:/resources/tests/testlist.xml</uri>
-  </test>
-</tests>
