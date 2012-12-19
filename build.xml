@@ -81,7 +81,7 @@
   </target>
 
   <target name="xunit.init" depends="init">
-    <mkdir dir="build/urn.org.netkernelroc.netkernel.xunit.assertions"/>
+    <mkdir dir="build/urn.org.netkernelroc.xunit"/>
   </target>
 
   <target name="xunit.build" depends="xunit.init">
@@ -93,43 +93,43 @@
     </path>
 
     <javac classpathref="build.path"
-           srcdir="urn.org.netkernelroc.netkernel.xunit.assertions/"
+           srcdir="urn.org.netkernelroc.xunit/"
            includes="**/*.java"
-           destdir="build/urn.org.netkernelroc.netkernel.xunit.assertions"
+           destdir="build/urn.org.netkernelroc.xunit"
            debug="true"
            target="1.5"/>
 
     <groovyc classpathref="build.path"
-             srcdir="urn.org.netkernelroc.netkernel.xunit.assertions/"
+             srcdir="urn.org.netkernelroc.xunit/"
              includes="**/*.groovy"
-             destdir="build/urn.org.netkernelroc.netkernel.xunit.assertions"/>
+             destdir="build/urn.org.netkernelroc.xunit"/>
 
-    <copy todir="build/urn.org.netkernelroc.netkernel.xunit.assertions">
-      <fileset dir="urn.org.netkernelroc.netkernel.xunit.assertions"/>
+    <copy todir="build/urn.org.netkernelroc.xunit">
+      <fileset dir="urn.org.netkernelroc.xunit"/>
     </copy>
-    <copy todir="build/urn.org.netkernelroc.netkernel.xunit.assertions.doc">
-      <fileset dir="urn.org.netkernelroc.netkernel.xunit.assertions.doc"/>
+    <copy todir="build/urn.org.netkernelroc.xunit.doc">
+      <fileset dir="urn.org.netkernelroc.xunit.doc"/>
     </copy>
 
-    <set-version-number srcmodulefile="urn.org.netkernelroc.netkernel.xunit.assertions/module.xml"
-                        destmodulefile="build/urn.org.netkernelroc.netkernel.xunit.assertions/module.xml"
+    <set-version-number srcmodulefile="urn.org.netkernelroc.xunit/module.xml"
+                        destmodulefile="build/urn.org.netkernelroc.xunit/module.xml"
                         version="${xunit.version}"/>
-    <set-version-number srcmodulefile="urn.org.netkernelroc.netkernel.xunit.assertions.doc/module.xml"
-                        destmodulefile="build/urn.org.netkernelroc.netkernel.xunit.assertions.doc/module.xml"
+    <set-version-number srcmodulefile="urn.org.netkernelroc.xunit.doc/module.xml"
+                        destmodulefile="build/urn.org.netkernelroc.xunit.doc/module.xml"
                         version="${xunit.version}"/>
 
     <nkmodule destdir="build/modules/"
-              modulefile="urn.org.netkernelroc.netkernel.xunit.assertions/module.xml">
-      <zipfileset dir="build/urn.org.netkernelroc.netkernel.xunit.assertions" prefix=""/>
+              modulefile="urn.org.netkernelroc.xunit/module.xml">
+      <zipfileset dir="build/urn.org.netkernelroc.xunit" prefix=""/>
     </nkmodule>
     <nkmodule destdir="build/modules/"
-              modulefile="urn.org.netkernelroc.netkernel.xunit.assertions.doc/module.xml">
-      <zipfileset dir="build/urn.org.netkernelroc.netkernel.xunit.assertions.doc" prefix=""/>
+              modulefile="urn.org.netkernelroc.xunit.doc/module.xml">
+      <zipfileset dir="build/urn.org.netkernelroc.xunit.doc" prefix=""/>
     </nkmodule>
   </target>
 
   <target name="xunit-test.init" depends="init">
-    <mkdir dir="build/urn.org.netkernelroc.netkernel.xunit.assertions.test"/>
+    <mkdir dir="build/urn.org.netkernelroc.xunit.test"/>
   </target>
 
   <target name="xunit-test.build" depends="xunit-test.init,xunit.build">
@@ -139,23 +139,23 @@
         <include name="netkernel/module-jars/*.jar"/>
         <include name="*.jar"/>
       </fileset>
-      <pathelement path="build/urn.org.netkernelroc.netkernel.xunit.assertions.test"/>
+      <pathelement path="build/urn.org.netkernelroc.xunit.test"/>
     </path>
 
     <javac classpathref="build.path"
-           srcdir="urn.org.netkernelroc.netkernel.xunit.assertions"
+           srcdir="urn.org.netkernelroc.xunit"
            includes="**/*.java"
-           destdir="build/urn.org.netkernelroc.netkernel.xunit.assertions"
+           destdir="build/urn.org.netkernelroc.xunit"
            debug="true"
            target="1.5"/>
 
-    <copy todir="build/urn.org.netkernelroc.netkernel.xunit.assertions.test">
-      <fileset dir="urn.org.netkernelroc.netkernel.xunit.assertions.test"/>
+    <copy todir="build/urn.org.netkernelroc.xunit.test">
+      <fileset dir="urn.org.netkernelroc.xunit.test"/>
     </copy>
 
     <nkmodule destdir="build/modules/"
-              modulefile="build/urn.org.netkernelroc.netkernel.xunit.assertions.test/module.xml">
-      <zipfileset dir="build/urn.org.netkernelroc.netkernel.xunit.assertions.test" prefix=""/>
+              modulefile="build/urn.org.netkernelroc.xunit.test/module.xml">
+      <zipfileset dir="build/urn.org.netkernelroc.xunit.test" prefix=""/>
     </nkmodule>
   </target>
 
@@ -203,7 +203,7 @@
       </fileset>
     </path>
     <xslt classpathref="test-path"
-          in="urn.org.netkernelroc.netkernel.xunit.assertions.test/etc/system/Tests.xml"
+          in="urn.org.netkernelroc.xunit.test/etc/system/Tests.xml"
           out="build/tests/xunit-testng.xml">
       <style>
         <javaresource classpathref="test-path" name="generate-suite.xsl"/>
@@ -214,7 +214,7 @@
             classpathref="test-path" haltonfailure="true">
       <xmlfileset dir="build/tests"/>
       <sysproperty key="java.protocol.handler.pkgs" value="org.ten60.netkernel.protocolhandler"/>
-      <sysproperty key="org.netkernelroc.antTools.testNG.modules" value="build/urn.org.netkernelroc.netkernel.xunit.assertions/,build/urn.org.netkernelroc.netkernel.xunit.assertions.test/,build/urn.org.netkernelroc.netkernel.xunit.assertions.doc/"/>
+      <sysproperty key="org.netkernelroc.antTools.testNG.modules" value="build/urn.org.netkernelroc.xunit/,build/urn.org.netkernelroc.xunit.test/,build/urn.org.netkernelroc.xunit.doc/"/>
       <sysproperty key="org.netkernelroc.antTools.testNG.moduleConf" value="lib/netkernel/modules.conf"/>
       <sysproperty key="netkernel.http.backend.port" value="1068"/>
     </testng>
