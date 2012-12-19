@@ -6,3 +6,8 @@ build
 *.iml
 
 
+
+/build.properties
+/lib/
+/log/
+/test-output/

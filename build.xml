@@ -28,6 +28,7 @@
 <project name="xunit" default="build">
   <property file="build.properties"/>
   <property name="nk4-ant-suite" value="../NK4-Ant-Suite-0_3/"/>
+  <property name="groovy-jar" location="ext/groovy-all-2.0.5.jar"/>
   <property name="xunit.version" value="1.0.0"/>
 
   <include file="${nk4-ant-suite}/build-common.xml"/>
@@ -57,8 +58,11 @@
            classpathref="nk4.anttools.path"
            classname="org.testng.TestNGAntTask" />
 
+  <taskdef name="groovyc"
+           classname="org.codehaus.groovy.ant.Groovyc"
+           classpath="${groovy-jar}"/>
+
   <target name="clean">
-    <!--delete dir="module" includes="**/build/**/*"/-->
     <delete dir="build"/>
     <delete dir="${basedir}">
       <include name="*.jar"/>
@@ -67,11 +71,13 @@
 
   <target name="clean.full" depends="clean">
     <delete dir="lib/netkernel"/>
-    <nkdownload path="lib/netkernel"/>
+    <nkdownload path="lib/netkernel"
+                config="modules.conf"/>
   </target>
 
   <target name="init" unless="netkernel.downloaded">
-    <nkdownload path="lib/netkernel"/>
+    <nkdownload path="lib/netkernel"
+                config="modules.conf"/>
   </target>
 
   <target name="xunit.init" depends="init">
@@ -80,16 +86,10 @@
 
   <target name="xunit.build" depends="xunit.init">
     <path id="build.path">
-      <!-- Chris - I don't think I need any lib support here -->
-      <!--
       <fileset dir="lib">
         <include name="netkernel/lib/*.jar"/>
         <include name="netkernel/modules/*.jar"/>
-        <include name="*.jar"/>
       </fileset>
-      <fileset dir="module/urn.org.netkernelroc.mod.xunit/src/lib/"
-               includes="*.jar"/>
-      -->
     </path>
 
     <javac classpathref="build.path"
@@ -98,6 +98,11 @@
            destdir="build/urn.org.netkernelroc.netkernel.xunit.assertions"
            debug="true"
            target="1.5"/>
+
+    <groovyc classpathref="build.path"
+             srcdir="urn.org.netkernelroc.netkernel.xunit.assertions/"
+             includes="**/*.groovy"
+             destdir="build/urn.org.netkernelroc.netkernel.xunit.assertions"/>
 
     <copy todir="build/urn.org.netkernelroc.netkernel.xunit.assertions">
       <fileset dir="urn.org.netkernelroc.netkernel.xunit.assertions"/>
@@ -114,11 +119,11 @@
                         version="${xunit.version}"/>
 
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.org.netkernelroc.netkernel.xunit.assertions/module.xml">
+              modulefile="urn.org.netkernelroc.netkernel.xunit.assertions/module.xml">
       <zipfileset dir="build/urn.org.netkernelroc.netkernel.xunit.assertions" prefix=""/>
     </nkmodule>
     <nkmodule destdir="build/modules/"
-              modulefile="module/urn.org.netkernelroc.netkernel.xunit.assertions.doc/module.xml">
+              modulefile="urn.org.netkernelroc.netkernel.xunit.assertions.doc/module.xml">
       <zipfileset dir="build/urn.org.netkernelroc.netkernel.xunit.assertions.doc" prefix=""/>
     </nkmodule>
   </target>
@@ -164,7 +169,7 @@
                name="netkernelroc-xunit"
                description="NetKernelROC / XUnit / Assertions"
                version="${xunit.version}">
-      <modulesfileset dir="build/" prefix="" includes="*.jar"/>
+      <modulesfileset dir="build/modules/" prefix="modules" includes="*.jar"/>
     </nkpackage>
   </target>
 
@@ -199,7 +204,7 @@
     </path>
     <xslt classpathref="test-path"
           in="urn.org.netkernelroc.netkernel.xunit.assertions.test/etc/system/Tests.xml"
-          out="build/tests/webtests-testng.xml">
+          out="build/tests/xunit-testng.xml">
       <style>
         <javaresource classpathref="test-path" name="generate-suite.xsl"/>
       </style>
