@@ -10,8 +10,9 @@ buildscript {
 }
 
 project.ext {
-  netkernelModules = ["urn:org:netkernelroc:netkernel:xunit:assertions"]
+  netkernelModules = ["urn:org:netkernelroc:netkernel:xunit:assertions", "urn:org:netkernelroc:xunit"]
 }
+
 
 
 

@@ -1,0 +1,141 @@
+{endpoint}netkernelroc:assert:HTTP{/endpoint}
+
+
+
+The Test list must import the test library:
+
+{xml}
+<testlist>
+  <import>res:/org/netkernelroc/netkernel/xunit/assertions/netkernelrocAssertLibrary.xml</import>
+</testlist>
+{/xml}
+
+An example test would look like this:
+
+{xml}
+<testlist>
+  <import>res:/org/netkernelroc/netkernel/xunit/assertions/netkernelrocAssertLibrary.xml</import>
+
+  <test>
+  <request>
+    <identifier>active:httpGet</identifier>
+    <argument name="url">http://www.bestbuy.com</argument>
+  </request>
+  <assert>
+    <httpReturnCode>200</httpReturnCode>
+    <httpHeaderCache-Control>86400</httpHeaderCache-Control>
+    <httpHeaderDate/>
+  </assert>
+  </test>
+</testlist>
+{/xml}
+
+This test issues a HTTP GET request to the URL ''www.bestbuy.com'' and tests
+for the return code for the value 200, a Cache-Control header with the value 86400,
+and the existence of the Date header.
+
+
+The library contains one assertion for each standard response header as well
+as the return code.
+Each test can be for just the existence of the header information as
+well as the specific contents.
+When testing for the contents, the test first attempts a strict string
+comparison and if that fails, it interprets the string as regular expression
+and attempts the test again.
+
+All assertions work the same way and some of them have detailed documentation below.
+
+
+The library supplies the following additional assertions:
+
+=== httpReturnCode ===
+
+The HTTP response can be tested against a three character literal or a regular expression
+pattern.
+
+For example, to test for the return code ''200'', use the following assertion:
+
+{xml}
+<httpReturnCode>200</httpReturnCode>
+{/xml}
+
+To test for any return code in the "200 family", use the following assertion:
+
+{xml}
+<httpReturnCode>2..</httpReturnCode>
+{/xml}
+
+=== httpHeaderAccept-Ranges ===
+=== httpHeaderAge ===
+=== httpHeaderAllow ===
+
+
+
+=== httpHeaderCache-Control ===
+
+The HTTP response can be tested for the presence and value of the ''Cache-Control'' header.
+Simple include an empty tag to test for the presence of the header
+or include the literal value or a regular expression pattern.
+
+For example, to test for the presence of the ''Cache-Control'' header:
+
+{xml}
+<httpHeaderCache-Control/>
+{/xml}
+
+To test for a particular value in the ''Cache-Control'' header:
+
+{xml}
+<httpHeaderCache-Control>86400</httpHeaderCache-Control>
+{/xml}
+
+=== httpHeaderConnection ===
+=== httpHeaderContent-Encoding ===
+=== httpHeaderContent-Language ===
+=== httpHeaderContent-Length ===
+=== httpHeaderContent-Location ===
+=== httpHeaderContent-MD5 ===
+=== httpHeaderContent-Disposition ===
+=== httpHeaderContent-Range ===
+=== httpHeaderContent-Type ===
+=== httpHeaderDate ===
+=== httpHeaderETag ===
+=== httpHeaderExpires ===
+=== httpHeaderLastModified ===
+=== httpHeaderLink ===
+=== httpHeaderLocation ===
+
+The HTTP response can be tested for the presence and value of the ''Location'' header.
+Simple include an empty tag to test for the presence of the header
+or include the literal value or a regular expression pattern.
+
+For example, to test for the presence of the ''Location'' header:
+
+{xml}
+<httpHeaderLocation/>
+{/xml}
+
+To test for a particular value in the ''Location'' header:
+
+{xml}
+<httpHeaderLocation>http://www.databliss.net/contact</httpHeaderLocation>
+{/xml}
+
+
+=== httpHeaderP3P ===
+=== httpHeaderPragma ===
+=== httpHeaderProxy-Authenticate ===
+=== httpHeaderRefresh ===
+=== httpHeaderRetry-After ===
+=== httpHeaderServer ===
+=== httpHeaderSet-Cookie ===
+=== httpHeaderStrict-Transport-Security ===
+=== httpHeaderTrailer ===
+=== httpHeaderTransfer-Encoding ===
+=== httpHeaderVary ===
+=== httpHeaderVia ===
+=== httpHeaderWarning ===
+=== httpHeaderWWW-Authenticate ===
+
+
+

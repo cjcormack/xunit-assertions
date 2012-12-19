@@ -1,0 +1,151 @@
+<module version="2.0">
+  <meta>
+    <identity>
+      <uri>urn:org:netkernelroc:xunit</uri>
+      <version>1.0.0</version>
+    </identity>
+    <info>
+      <name>NetKernelROC / XUnit / Assertions</name>
+      <description>XUnit assertion libraries</description>
+      <icon>res:/org/netkernelroc/xunit/images/icon.png</icon>
+    </info>
+  </meta>
+
+  <system>
+    <dynamic/>
+    <classloader>
+      <exports>
+        <match>org\.netkernelroc\.xunit\.endpoint\..*</match>
+      </exports>
+    </classloader>
+  </system>
+
+  <rootspace name="NetKernelROC / XUnit / Assertions" uri="urn:org:netkernelroc:xunit">
+
+
+    <fileset>
+      <id>netkernelroc:assertLibrary</id>
+      <name>NetKernelROC XUnit Assert Library</name>
+      <regex>res:/org/netkernelroc/xunit/netkernelrocAssertLibrary.xml</regex>
+    </fileset>
+
+    <endpoint>
+      <id>netkernelroc:assert:CSS</id>
+      <name>CSS Assert</name>
+      <description>Provides a set of assertions for XML content using CSS selectors</description>
+      <grammar>
+        <active>
+          <identifier>active:assertCSS</identifier>
+          <argument name="result" min="1" max="1"/>
+          <argument name="test" min="1" max="1"/>
+        </active>
+      </grammar>
+      <class>org.netkernelroc.xunit.endpoint.CSSAssert</class>
+    </endpoint>
+
+    <endpoint>
+        <id>netkernelroc:assert:HTTP</id>
+        <name>HTTP Assert</name>
+        <description>Provides an assertion for HTTP</description>
+        <grammar>
+            <active>
+                <identifier>active:assertHTTP</identifier>
+                <argument name="result" min="1" max="1" desc="http response under test"/>
+                <argument name="test" min="1" max="1" desc="http assertions in XML"/>
+            </active>
+        </grammar>
+      <class>org.netkernelroc.xunit.endpoint.HTTPAssert</class>
+    </endpoint>
+
+
+    <endpoint>
+      <id>netkernelroc:assert:HTTPOld</id>
+      <name>HTTP Assert</name>
+      <description>Provides a set of assertions for the HTTP protocol</description>
+      <grammar>
+        <active>
+          <identifier>active:assertHTTP</identifier>
+          <argument name="response" min="1" max="1"/>
+          <argument name="headerTestValue" min="1" max="1"/>
+          <argument name="headerName" min="1" max="1"/>
+        </active>
+      </grammar>
+      <class>org.netkernelroc.xunit.endpoint.HTTPOldAssert</class>
+    </endpoint>
+
+    <endpoint>
+        <id>netkernelroc:assert:image</id>
+        <name>Image Assert</name>
+        <description>Provides a set of assertions for Images</description>
+        <grammar>
+            <active>
+                <identifier>active:assertImage</identifier>
+                <argument name="result" min="1" max="1" desc="image under test." />
+                <argument name="test" min="1" max="1" desc="image assertions in XML" />
+            </active>
+        </grammar>
+      <class>org.netkernelroc.xunit.endpoint.ImageAssert</class>
+    </endpoint>
+    <!-- I would like to see the operand be use for both -->
+    <endpoint>
+        <id>netkernelroc:assert:imageEquality</id>
+        <name>Image Equality Assert</name>
+        <description>Provides an equality assertion for two images</description>
+        <grammar>
+            <active>
+                <identifier>active:assertImageEquality</identifier>
+                <argument name="result" min="1" max="1" desc="source image under test" />
+                <argument name="test" min="1" max="1" desc="image to compare with" />
+            </active>
+        </grammar>
+      <class>org.netkernelroc.xunit.endpoint.ImageEqualityAssert</class>
+    </endpoint>
+
+    <import>
+      <private/>
+      <uri>urn:org:netkernel:xml:core</uri>
+    </import>
+    <import>
+      <private/>
+      <uri>urn:org:netkernel:ext:layer1</uri>
+    </import>
+    <import>
+      <uri>urn:org:netkernel:lang:groovy</uri>
+    </import>
+    <import>
+      <uri>urn:org:netkernel:util:image</uri>
+    </import>
+
+
+    <fileset>
+      <regex>res:/org/netkernelroc/xunit/images/icon.png</regex>
+      <rewrite>res:/resources/images/icon.png</rewrite>
+    </fileset>
+  </rootspace>
+
+  <rootspace>
+    <mapper>
+      <config>res:/resources/mappers/serviceMapper.xml</config>
+      <space>
+        <import>
+          <uri>urn:org:netkernel:util:image</uri>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:lang:groovy</uri>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:ext:layer1</uri>
+        </import>
+        <import>
+          <uri>urn:org:netkernel:xml:core</uri>
+        </import>
+      </space>
+    </mapper>
+    <fileset>
+      <regex>res:/resources/mappers/.*</regex>
+    </fileset>
+
+  </rootspace>
+
+
+</module>
