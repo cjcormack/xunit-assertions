@@ -94,7 +94,7 @@
       <representation>org.netkernel.image.rep.ImageAspect</representation>
     </request>
     <assert>
-      <notNull />
+      <notNull/>
       <image>
         <assertions>
           <height>54</height>
@@ -109,7 +109,7 @@
       <identifier>res:/resources/images/logo.png</identifier>
     </request>
     <assert>
-      <notNull />
+      <notNull/>
       <image>
         <assertions>
           <height>54</height>
@@ -125,7 +125,7 @@
       <identifier>res:/resources/images/redbox.jpg</identifier>
     </request>
     <assert>
-      <notNull />
+      <notNull/>
       <image>
         <assertions>
           <width>400</width>
@@ -173,7 +173,7 @@
       <identifier>res:/resources/images/redbox.jpg</identifier>
     </request>
     <assert>
-      <notNull />
+      <notNull/>
       <image>
         <assertions>
           <color>{"x":1,"y":1,"red":254, "green":0, "blue":0}</color>
@@ -188,7 +188,11 @@
       <identifier>res:/resources/images/redbox.jpg</identifier>
     </request>
     <assert>
-      <imageEquals>res:/resources/images/redbox.png</imageEquals>
+      <image>
+        <assertions>
+          <equals>res:/resources/images/redbox.png</equals>
+        </assertions>
+      </image>
     </assert>
   </test>
 

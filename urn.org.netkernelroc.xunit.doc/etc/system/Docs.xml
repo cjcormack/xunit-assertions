@@ -38,17 +38,10 @@
 
   <doc>
      <id>urn:org:netkernelroc:xunit:assertImage</id>
-     <title>Image content assertions</title>
+     <title>Image assertions</title>
      <keywords>Image</keywords>
      <desc>Performs assertions on an image such as height, width and color</desc>
      <uri>res:/org/netkernelroc/xunit/doc/doc_assertImage.txt</uri>
-   </doc>
-
-   <doc>
-     <id>urn:org:netkernelroc:xunit:assertImageEquality</id>
-     <title>Image equality assertions</title>
-     <desc>Compares two images to see if they are equivalent</desc>
-     <uri>res:/org/netkernelroc/xunit/doc/doc_assertImageEquality.txt</uri>
    </doc>
 
 </docs>

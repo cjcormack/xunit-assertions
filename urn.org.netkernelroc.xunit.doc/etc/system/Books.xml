@@ -10,7 +10,6 @@
       <item id="urn:org:netkernelroc:xunit:assertHTTP"/>
       <item id="urn:org:netkernelroc:xunit:assertCSS"/>
       <item id="urn:org:netkernelroc:xunit:assertImage" />
-      <item id="urn:org:netkernelroc:xunit:assertImageEquality" />
       <separator/>
       <item id="urn:org:netkernelroc:xunit:css-license"/>
       <item id="urn:org:netkernelroc:xunit:license-mit"/>
