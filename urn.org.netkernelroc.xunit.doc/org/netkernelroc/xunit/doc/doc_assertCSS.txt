@@ -1,13 +1,36 @@
-{endpoint}netkernelroc:assert:CSS{/endpoint}
 
 
-= CSS Assertion =
 
-The ''css'' assert extends the standard set of XUnit assertions
-to provide assertions on XML content using the CSS3 selector grammar.
+= XML Structure Assertions using CSS Selectors =
 
-An assertion requires two parts - the CSS3 selector and an integer, which
-are separated by the forward-slash character (/):
+
+== Setup ==
+To use the XML structure assertions, you must import the module '''urn:org:netkernelroc:xunit'''.
+
+{xml}
+<import>
+  <uri>urn:org:netkernelroc:xunit</uri>
+</import>
+{/xml}
+
+and import the test library in your testlist document:
+
+{xml}
+<testlist>
+  <import>res:/org/netkernelroc/netkernel/xunit/assertions/netkernelrocAssertLibrary.xml</import>
+</testlist>
+{/xml}
+
+
+== Assertions ==
+
+All XML structure assertion test can be specified within a single ''css'' assertion declaration.
+The valid test is:
+
+* '''css''' - asserts the number of XML node selected by the CSS3 selector grammar.
+
+An assertion requires two parts - the CSS3 selector and an integer.
+The two parts are separated by the forward-slash character (/):
 
 {xml}
 <css>{css3 selector}/{integer}</css>
@@ -21,14 +44,13 @@ If the number of selected elements matches the integer value, the assertion
 returns TRUE, otherwise it returns FALSE.
 
 CSS3 selectors are easy to understand and relatively powerful. Documentation can be found
-in numerous documents on the Web including:
-
-[http://www.w3.org/TR/selectors/]
+in numerous documents on the Web, including [http://www.w3.org/TR/selectors/].
 
 
-== Example ==
 
-For example, the following XML
+== Examples ==
+
+An example test could use the following XML document
 
 
 {xml}
@@ -41,11 +63,17 @@ For example, the following XML
 </customer>
 {/xml}
 
-would have the following assertion be true:
+and would have the following assertions be true:
 
 {xml}
-<css>address/2</css>
+<css_xml>
+  <assertions>
+    <css>name/1</css>
+    <css>address/2</css>
+  </assertions>
+</css_xml>
 {/xml}
+
 
 Testing HTML requires a conversion to properly formed XML which can be
 done with the TagSoup service.
@@ -75,13 +103,13 @@ An example test would look like this:
         </argument>
       </request>
       <assert>
-        <css>head/1</css>
+        <css_xml>
+          <assertions>
+            <css>head/1</css>
+          </assertions>
+        </css_xml>
       </assert>
     </test>
 
 </testlist>
 {/xml}
-
-
-
-

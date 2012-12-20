@@ -7,55 +7,59 @@
       <identifier>res:/resources/representations/test.html</identifier>
     </request>
     <assert>
-      <css>* / 251</css>
-      <css>:root/ 1</css>
-      <css>:empty/ 2</css>
-      <css>div:first-child/ 51</css>
-      <css>div:nth-child(even)/ 106</css>
-      <css>div:nth-child(2n)/ 106</css>
-      <css>div:nth-child(odd)/ 137</css>
-      <css>div:nth-child(2n+1)/ 137</css>
-      <css>div:nth-child(n)/ 243</css>
-      <css>script:first-of-type/ 1</css>
-      <css>div:last-child/ 53</css>
-      <css>script:last-of-type/ 1</css>
-      <css>script:nth-last-child(odd)/ 1</css>
-      <css>script:nth-last-child(even)/ 1</css>
-      <css>script:nth-last-child(5)/ 0</css>
-      <css>script:nth-of-type(2)/ 1</css>
-      <css>script:nth-last-of-type(n)/ 2</css>
-      <css>div:only-child/ 22</css>
-      <css>meta:only-of-type/ 1</css>
-      <css>div > div/ 242</css>
-      <css>div + div/ 190</css>
-      <css>div ~ div/ 190</css>
-      <css>body/ 1</css>
-      <css>body div/ 243</css>
-      <css>div/ 243</css>
-      <css>div div/ 242</css>
-      <css>div div div/ 241</css>
-      <css>div, div, div/ 243</css>
-      <css>div, a, span/ 243</css>
-      <css>.dialog/ 51</css>
-      <css>div.dialog/ 51</css>
-      <css>div .dialog/ 51</css>
-      <css>div.character, div.dialog/ 99</css>
-      <css>#speech5/ 1</css>
-      <css>div#speech5/ 1</css>
-      <css>div #speech5/ 1</css>
-      <css>div.scene div.dialog/ 49</css>
-      <css>div#scene1 div.dialog div/ 142</css>
-      <css>#scene1 #speech1/ 1</css>
-      <css>div[class]/ 103</css>
-      <css>div[class=dialog]/ 50</css>
-      <css>div[class^=dia]/ 51</css>
-      <css>div[class$=log]/ 50</css>
-      <css>div[class*=sce]/ 1</css>
-      <css>div[class|=dialog]/ 50</css>
-      <css>div[class~=dialog]/ 51</css>
-      <css>head > :not(meta)/ 2</css>
-      <css>head > :not(:last-child)/ 2</css>
-      <css>div:not(div.dialog)/ 192</css>
+      <css_xml>
+        <assertions>
+          <css>* / 251</css>
+          <css>:root/ 1</css>
+          <css>:empty/ 2</css>
+          <css>div:first-child/ 51</css>
+          <css>div:nth-child(even)/ 106</css>
+          <css>div:nth-child(2n)/ 106</css>
+          <css>div:nth-child(odd)/ 137</css>
+          <css>div:nth-child(2n+1)/ 137</css>
+          <css>div:nth-child(n)/ 243</css>
+          <css>script:first-of-type/ 1</css>
+          <css>div:last-child/ 53</css>
+          <css>script:last-of-type/ 1</css>
+          <css>script:nth-last-child(odd)/ 1</css>
+          <css>script:nth-last-child(even)/ 1</css>
+          <css>script:nth-last-child(5)/ 0</css>
+          <css>script:nth-of-type(2)/ 1</css>
+          <css>script:nth-last-of-type(n)/ 2</css>
+          <css>div:only-child/ 22</css>
+          <css>meta:only-of-type/ 1</css>
+          <css>div > div/ 242</css>
+          <css>div + div/ 190</css>
+          <css>div ~ div/ 190</css>
+          <css>body/ 1</css>
+          <css>body div/ 243</css>
+          <css>div/ 243</css>
+          <css>div div/ 242</css>
+          <css>div div div/ 241</css>
+          <css>div, div, div/ 243</css>
+          <css>div, a, span/ 243</css>
+          <css>.dialog/ 51</css>
+          <css>div.dialog/ 51</css>
+          <css>div .dialog/ 51</css>
+          <css>div.character, div.dialog/ 99</css>
+          <css>#speech5/ 1</css>
+          <css>div#speech5/ 1</css>
+          <css>div #speech5/ 1</css>
+          <css>div.scene div.dialog/ 49</css>
+          <css>div#scene1 div.dialog div/ 142</css>
+          <css>#scene1 #speech1/ 1</css>
+          <css>div[class]/ 103</css>
+          <css>div[class=dialog]/ 50</css>
+          <css>div[class^=dia]/ 51</css>
+          <css>div[class$=log]/ 50</css>
+          <css>div[class*=sce]/ 1</css>
+          <css>div[class|=dialog]/ 50</css>
+          <css>div[class~=dialog]/ 51</css>
+          <css>head > :not(meta)/ 2</css>
+          <css>head > :not(:last-child)/ 2</css>
+          <css>div:not(div.dialog)/ 192</css>
+        </assertions>
+      </css_xml>
     </assert>
   </test>
 
@@ -64,8 +68,12 @@
       <identifier>res:/resources/representations/anton-bug.xml</identifier>
     </request>
     <assert>
-      <css>token[tag^=l] + token/3</css>
-      <css>token[tag^=l] ~ token/6</css>
+      <css_xml>
+        <assertions>
+          <css>token[tag^=l] + token/3</css>
+          <css>token[tag^=l] ~ token/6</css>
+        </assertions>
+      </css_xml>
     </assert>
   </test>
 
