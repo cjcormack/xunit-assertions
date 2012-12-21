@@ -29,7 +29,7 @@
   <property file="build.properties"/>
   <property name="nk4-ant-suite" value="../NK4-Ant-Suite-0_3/"/>
   <property name="groovy-jar" location="ext/groovy-all-2.0.5.jar"/>
-  <property name="xunit.version" value="1.0.0"/>
+  <property name="xunit.version" value="1.0.1"/>
 
   <include file="${nk4-ant-suite}/build-common.xml"/>
 
